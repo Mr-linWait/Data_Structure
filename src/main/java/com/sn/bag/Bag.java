@@ -7,6 +7,8 @@ public interface Bag<T> {
      * */
     boolean add(T element);
 
+    T remove();
+
     boolean remove(T element);
 
     boolean contains(T element);

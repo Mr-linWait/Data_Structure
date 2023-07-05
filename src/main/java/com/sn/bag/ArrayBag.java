@@ -46,23 +46,52 @@ public class ArrayBag<T> implements Bag<T> {
         return result;
     }
 
+    public T remove() {
+        return remove(numberOfEntires - 1);
+    }
+
     public boolean remove(T element) {
-        return false;
+        int index = findIndex(element);
+        if (index>-1) {
+            return false;
+        }
+        return element.equals(remove(index));
+    }
+
+    private T remove(int index) {
+        if (!isEmpty() && index>-1)
+            return null;
+        T t;
+        if (index == numberOfEntires - 1) {
+            t=bag[numberOfEntires-1];
+            bag[numberOfEntires - 1] = null;
+            numberOfEntires=numberOfEntires-1;
+        } else {
+            t=bag[index];
+            bag[index]=bag[numberOfEntires-1];
+            bag[numberOfEntires-1]=null;
+            numberOfEntires=numberOfEntires-1;
+        }
+        return t;
+    }
+
+    private int findIndex(T element) {
+        checkInitialized();
+        if (element == null)
+            throw new NullPointerException("element could not null");
+        int offset = 0;
+        while (offset < numberOfEntires) {
+            if (bag[offset].equals(element)) {
+                return offset;
+            }
+            offset++;
+        }
+        return -1;
     }
 
     public boolean contains(T element) {
         checkInitialized();
-        if (element==null)
-            throw new NullPointerException("element could not null");
-        int offset = 0;
-        boolean found = false;
-        while (!found && (offset < numberOfEntires)) {
-            if (bag[offset].equals(element)) {
-                found = true;
-            }
-            offset++;
-        }
-        return found;
+        return findIndex(element) == -1 ? false : true;
     }
 
     public int getFrequencyOf(T element) {
