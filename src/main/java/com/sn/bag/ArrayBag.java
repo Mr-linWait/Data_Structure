@@ -18,12 +18,9 @@ public class ArrayBag<T> implements Bag<T> {
     private static final int MAX_CAPACITY = Integer.MAX_VALUE - 8;
 
     public ArrayBag(int capacity) {
-        if (capacity < 0)
-            throw new IllegalArgumentException("illeagl capacity :" + capacity);
-        if (capacity == 0)
-            capacity = DEFAULT_CAPACITY;
-        if (capacity >= MAX_CAPACITY)
-            capacity = MAX_CAPACITY;
+        if (capacity < 0) throw new IllegalArgumentException("illeagl capacity :" + capacity);
+        if (capacity == 0) capacity = DEFAULT_CAPACITY;
+        if (capacity >= MAX_CAPACITY) capacity = MAX_CAPACITY;
 
         bag = (T[]) new Object[capacity];
         numberOfEntires = 0;
@@ -37,8 +34,7 @@ public class ArrayBag<T> implements Bag<T> {
     public boolean add(T element) {
         checkInitialized();
         boolean result;
-        if (isArrayFull())
-            result = false;
+        if (isArrayFull()) result = false;
         else {
             bag[numberOfEntires] = element;
             result = true;
@@ -52,33 +48,31 @@ public class ArrayBag<T> implements Bag<T> {
 
     public boolean remove(T element) {
         int index = findIndex(element);
-        if (index>-1) {
+        if (index <= -1) {
             return false;
         }
         return element.equals(remove(index));
     }
 
     private T remove(int index) {
-        if (!isEmpty() && index>-1)
-            return null;
+        if (isEmpty() && index <= -1) return null;
         T t;
         if (index == numberOfEntires - 1) {
-            t=bag[numberOfEntires-1];
+            t = bag[numberOfEntires - 1];
             bag[numberOfEntires - 1] = null;
-            numberOfEntires=numberOfEntires-1;
+            numberOfEntires = numberOfEntires - 1;
         } else {
-            t=bag[index];
-            bag[index]=bag[numberOfEntires-1];
-            bag[numberOfEntires-1]=null;
-            numberOfEntires=numberOfEntires-1;
+            t = bag[index];
+            bag[index] = bag[numberOfEntires - 1];
+            bag[numberOfEntires - 1] = null;
+            numberOfEntires = numberOfEntires - 1;
         }
         return t;
     }
 
     private int findIndex(T element) {
         checkInitialized();
-        if (element == null)
-            throw new NullPointerException("element could not null");
+        if (element == null) throw new NullPointerException("element could not null");
         int offset = 0;
         while (offset < numberOfEntires) {
             if (bag[offset].equals(element)) {
@@ -96,12 +90,10 @@ public class ArrayBag<T> implements Bag<T> {
 
     public int getFrequencyOf(T element) {
         checkInitialized();
-        if (element == null)
-            throw new NullPointerException(" element could not null");
+        if (element == null) throw new NullPointerException(" element could not null");
         int count = 0;
         for (int index = 0; index < numberOfEntires; index++) {
-            if (element.equals(bag[index]))
-                count++;
+            if (element.equals(bag[index])) count++;
         }
         return count;
     }
@@ -124,8 +116,7 @@ public class ArrayBag<T> implements Bag<T> {
     }
 
     private void checkInitialized() {
-        if (!initialized)
-            throw new SecurityException("ArrayBag object is not initialized");
+        if (!initialized) throw new SecurityException("ArrayBag object is not initialized");
     }
 
     public boolean isEmpty() {
