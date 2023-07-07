@@ -11,6 +11,8 @@ public interface Bag<T> {
 
     boolean remove(T element);
 
+    void clear();
+
     boolean contains(T element);
 
     /*

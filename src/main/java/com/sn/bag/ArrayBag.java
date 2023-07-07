@@ -1,9 +1,16 @@
 package com.sn.bag;
 
+import java.util.Arrays;
+/**
+ * 基于动态数组实现的包
+ * 1.因为包不维护项的次序，所以删除一项不需要将后续的所有数组项前移一个位置，用数组中最后一项来替换想删除的项，
+ *   然后将最后一项替换为 nu11。。
+ * 2.调整数组大小，使得它看上去能改变大小。为此，分配一个新数组长度增加原有数组的2倍，从原始数组中将项复制到数组中
+ */
 public class ArrayBag<T> implements Bag<T> {
 
-    /*负载数组*/
-    private final T[] bag;
+    /*负载数组 transient 禁止序列化*/
+    private transient T[] bag;
 
     /*包容量*/
     private int numberOfEntires;
@@ -18,10 +25,7 @@ public class ArrayBag<T> implements Bag<T> {
     private static final int MAX_CAPACITY = Integer.MAX_VALUE - 8;
 
     public ArrayBag(int capacity) {
-        if (capacity < 0) throw new IllegalArgumentException("illeagl capacity :" + capacity);
-        if (capacity == 0) capacity = DEFAULT_CAPACITY;
-        if (capacity >= MAX_CAPACITY) capacity = MAX_CAPACITY;
-
+        capacity=checkCapacity(capacity);
         bag = (T[]) new Object[capacity];
         numberOfEntires = 0;
         initialized = true;//init
@@ -31,30 +35,43 @@ public class ArrayBag<T> implements Bag<T> {
         this(DEFAULT_CAPACITY);
     }
 
+    private int checkCapacity(int capacity){
+        if (capacity < 0) throw new IllegalArgumentException("illeagl capacity :" + capacity);
+        if (capacity == 0) capacity = DEFAULT_CAPACITY;
+        if (capacity >= MAX_CAPACITY) capacity = MAX_CAPACITY;
+        return capacity;
+    }
+
+    private void grow(){
+        int oldCapacity=bag.length;
+        int newCapacity =checkCapacity(oldCapacity+oldCapacity>>1);
+        bag = Arrays.copyOf(bag, newCapacity);
+    }
+
     public boolean add(T element) {
         checkInitialized();
-        boolean result;
-        if (isArrayFull()) result = false;
-        else {
-            bag[numberOfEntires] = element;
-            result = true;
+        if (isArrayFull()) {
+            grow();
         }
-        return result;
+        bag[numberOfEntires] = element;
+        return true;
     }
 
     public T remove() {
-        return remove(numberOfEntires - 1);
+        checkInitialized();
+        return removeIndex(numberOfEntires - 1);
     }
 
     public boolean remove(T element) {
+        checkInitialized();
         int index = findIndex(element);
         if (index <= -1) {
             return false;
         }
-        return element.equals(remove(index));
+        return element.equals(removeIndex(index));
     }
 
-    private T remove(int index) {
+    private T removeIndex(int index) {
         if (isEmpty() && index <= -1) return null;
         T t;
         if (index == numberOfEntires - 1) {
@@ -71,7 +88,6 @@ public class ArrayBag<T> implements Bag<T> {
     }
 
     private int findIndex(T element) {
-        checkInitialized();
         if (element == null) throw new NullPointerException("element could not null");
         int offset = 0;
         while (offset < numberOfEntires) {
@@ -122,4 +138,37 @@ public class ArrayBag<T> implements Bag<T> {
     public boolean isEmpty() {
         return numberOfEntires == 0;
     }
+
+    public void clear(){
+        while (!isEmpty()){
+            remove();
+        }
+        numberOfEntires=0;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
