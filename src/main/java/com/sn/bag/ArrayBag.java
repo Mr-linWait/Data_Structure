@@ -1,5 +1,6 @@
 package com.sn.bag;
 
+import java.io.Serializable;
 import java.util.Arrays;
 /**
  * 基于动态数组实现的包
@@ -7,7 +8,7 @@ import java.util.Arrays;
  *   然后将最后一项替换为 nu11。。
  * 2.调整数组大小，使得它看上去能改变大小。为此，分配一个新数组长度增加原有数组的2倍，从原始数组中将项复制到数组中
  */
-public class ArrayBag<T> implements Bag<T> {
+public class ArrayBag<T> implements Bag<T> , Serializable {
 
     /*负载数组 transient 禁止序列化*/
     private transient T[] bag;
