@@ -1,26 +1,26 @@
 package com.sn.bag;
 
-public interface Bag<T> {
+public interface Bag<E> {
 
     /*
      *
      * */
-    boolean add(T element);
+    boolean add(E element);
 
-    T remove();
+    E remove();
 
-    boolean remove(T element);
+    boolean remove(E element);
 
     void clear();
 
-    boolean contains(T element);
+    boolean contains(E element);
 
     /*
      * element 在包中出现的次数，element不能为null
      * */
-    int getFrequencyOf(T element);
+    int getFrequencyOf(E element);
 
-    T[] toArray();
+    E[] toArray();
 
     int size();
 
