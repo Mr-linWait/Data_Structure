@@ -1,4 +1,4 @@
 package com.sn.queue;
 
-public class LinkedDequeu implements Dequeue {
+public class LinkedDequeu implements Deque {
 }
