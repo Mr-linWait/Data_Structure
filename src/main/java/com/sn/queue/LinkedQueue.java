@@ -4,7 +4,7 @@ package com.sn.queue;
  *基于链表实现的队列
  */
 
-public class LinkedDequeu<E> implements Queue<E> {
+public class LinkedQueue<E> implements Queue<E> {
 
     private Node firstNode;
 
@@ -14,7 +14,7 @@ public class LinkedDequeu<E> implements Queue<E> {
 
 
 
-    public LinkedDequeu(){
+    public LinkedQueue(){
         firstNode=null;
         lastNode=null;
     }
