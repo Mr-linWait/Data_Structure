@@ -2,7 +2,7 @@ package com.sn.queue;
 
 import java.util.Arrays;
 
-public class ArrayQueue<E> implements Queue<E> {
+public class CycleArrayQueue<E> implements Queue<E> {
 
     private int frontIndex;//对头下标
 
@@ -16,7 +16,7 @@ public class ArrayQueue<E> implements Queue<E> {
 
     private boolean initialized = false;//初始化标志
 
-    public ArrayQueue(int initCapacity) {
+    public CycleArrayQueue(int initCapacity) {
         initCapacity = checkCapacity(initCapacity);
         queue = (E[]) new Object[initCapacity + 1];
         frontIndex = 0;
@@ -24,7 +24,7 @@ public class ArrayQueue<E> implements Queue<E> {
         initialized = true;
     }
 
-    public ArrayQueue() {
+    public CycleArrayQueue() {
         this(DEFAULT_CAPACITY);
     }
 
@@ -111,6 +111,7 @@ public class ArrayQueue<E> implements Queue<E> {
         frontIndex=0;
         backIndex=queue.length-1;
         E[] newQueue = (E[]) new Object[backIndex + 1];
+        queue=null;
         queue=newQueue;
     }
 }
