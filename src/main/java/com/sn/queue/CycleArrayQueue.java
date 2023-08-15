@@ -65,7 +65,7 @@ public class CycleArrayQueue<E> implements Queue<E> {
     private void ensureCapacity() {
         int oldCapacity = queue.length;
         if (frontIndex == (backIndex + 2) % oldCapacity) {
-            int newCapacity = queue.length >> 1;
+            int newCapacity = queue.length << 1;
             newCapacity = checkCapacity(newCapacity);
             E[] newQueue = (E[]) new Object[newCapacity];
             for (int index = 0; index < oldCapacity - 1; index++) {
