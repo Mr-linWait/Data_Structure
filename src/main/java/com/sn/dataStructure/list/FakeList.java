@@ -1,6 +1,5 @@
-package com.sn.list;
+package com.sn.dataStructure.list;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class FakeList<E> implements List<E> {

@@ -1,4 +1,4 @@
-package com.sn.list.skipList;
+package com.sn.dataStructure.list.skipList;
 
 import java.util.Random;
 

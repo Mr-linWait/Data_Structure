@@ -1,4 +1,4 @@
-package com.sn.bag;
+package com.sn.dataStructure.bag;
 
 public class LinkedBag<E> implements Bag<E>{
 

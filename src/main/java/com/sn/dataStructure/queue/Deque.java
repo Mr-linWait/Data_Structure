@@ -1,4 +1,4 @@
-package com.sn.queue;
+package com.sn.dataStructure.queue;
 
 public interface Deque<E> extends Queue<E> {
 

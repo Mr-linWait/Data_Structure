@@ -1,4 +1,4 @@
-package com.sn.list;
+package com.sn.dataStructure.list;
 
 public interface List<E> {
 

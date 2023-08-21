@@ -1,6 +1,4 @@
-package com.sn.queue;
-
-import java.util.Arrays;
+package com.sn.dataStructure.queue;
 
 public class CycleArrayQueue<E> implements Queue<E> {
 

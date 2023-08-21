@@ -1,4 +1,4 @@
-package com.sn.queue;
+package com.sn.dataStructure.queue;
 
 /**
  *基于链表实现的队列

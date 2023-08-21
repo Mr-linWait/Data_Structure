@@ -1,4 +1,4 @@
-package com.sn.bag;
+package com.sn.dataStructure.bag;
 
 import java.io.Serializable;
 import java.util.Arrays;
