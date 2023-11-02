@@ -1,5 +1,9 @@
-package com.sn.dataStructure.binaryTree;
+package com.sn.dataStructure.heap;
 
+/**
+ *
+ * @param <T>
+ */
 public interface MaxHeapInterface<T extends Comparable<? super T> > {
 
     /**
